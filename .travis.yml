@@ -1,4 +1,6 @@
-dist: xenial
+matrix:
+  include:
+    - dist: xenial
 language: java
 sudo: false
 jdk: openjdk15
