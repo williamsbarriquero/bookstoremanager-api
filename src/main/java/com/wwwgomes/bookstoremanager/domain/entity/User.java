@@ -1,6 +1,6 @@
-package com.wwwgomes.bookstoremanager.entity;
+package com.wwwgomes.bookstoremanager.domain.entity;
 
-import com.wwwgomes.bookstoremanager.entity.enums.Gender;
+import com.wwwgomes.bookstoremanager.domain.entity.enums.Gender;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
