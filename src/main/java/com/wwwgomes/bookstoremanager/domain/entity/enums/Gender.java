@@ -1,4 +1,4 @@
-package com.wwwgomes.bookstoremanager.entity.enums;
+package com.wwwgomes.bookstoremanager.domain.entity.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

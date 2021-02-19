@@ -1,4 +1,4 @@
-package com.wwwgomes.bookstoremanager.entity;
+package com.wwwgomes.bookstoremanager.domain.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
