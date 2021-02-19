@@ -2,14 +2,16 @@ package com.wwwgomes.bookstoremanager.entity;
 
 import com.wwwgomes.bookstoremanager.entity.enums.Gender;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
-public class User {
+public class User extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
