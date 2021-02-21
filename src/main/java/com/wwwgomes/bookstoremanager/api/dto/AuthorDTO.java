@@ -1,4 +1,4 @@
-package com.wwwgomes.bookstoremanager.api;
+package com.wwwgomes.bookstoremanager.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

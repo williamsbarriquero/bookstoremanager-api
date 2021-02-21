@@ -120,7 +120,7 @@
 					src/main/java/**/dto/**,
 					src/main/java/**/entity/**,
 					src/main/java/**/repository/**,
-					src/main/java/**/api/**
+					src/main/java/**/mapper/**
 					src/test/java/**
 				</sonar.exclusions>
 			</properties>
