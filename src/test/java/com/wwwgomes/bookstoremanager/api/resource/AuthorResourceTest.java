@@ -20,7 +20,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 @ExtendWith(MockitoExtension.class)
-public class AuthorResourceTest {
+class AuthorResourceTest {
 
     private static final String AUTHOR_API_URL_PATH = "/api/v1/authors";
 
@@ -50,7 +50,7 @@ public class AuthorResourceTest {
         Mockito.when(authorService.create(expectedCreatedAuthorDTO)).thenReturn(expectedCreatedAuthorDTO);
 
         mockMvc.perform(
-                MockMvcRequestBuilders.post("/api/v1/authors")
+                MockMvcRequestBuilders.post(AUTHOR_API_URL_PATH)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(JsonConversionUtils.asJsonString(expectedCreatedAuthorDTO)))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
@@ -70,6 +70,22 @@ public class AuthorResourceTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(JsonConversionUtils.asJsonString(expectedCreatedAuthorDTO)))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
+
+    }
+
+    @Test
+    void whenGETWithIdIsCalledThenStatusOkShouldBeReturned() throws Exception {
+        var expectedFoundAuthorDTO = authorDTOBuilder.buildAuthorDTO();
+
+        Mockito.when(authorService.findById(expectedFoundAuthorDTO.getId())).thenReturn(expectedFoundAuthorDTO);
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.get(AUTHOR_API_URL_PATH + "/" + expectedFoundAuthorDTO.getId())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Is.is(expectedFoundAuthorDTO.getId().intValue())))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name", Is.is(expectedFoundAuthorDTO.getName())))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.age", Is.is(expectedFoundAuthorDTO.getAge())));
 
     }
 }

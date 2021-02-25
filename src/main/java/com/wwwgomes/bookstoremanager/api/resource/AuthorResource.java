@@ -26,4 +26,14 @@ public class AuthorResource implements AuthorResourceDocs {
     public AuthorDTO create(@RequestBody @Valid AuthorDTO authorDTO) {
         return authorService.create(authorDTO);
     }
+
+    @GetMapping("/{id}")
+    public AuthorDTO findById(@PathVariable Long id) {
+        return authorService.findById(id);
+    }
+
+
+
+
+
 }
