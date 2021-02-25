@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+import java.util.List;
+
 @Api("Authors management")
 public interface AuthorResourceDocs {
 
@@ -23,4 +25,8 @@ public interface AuthorResourceDocs {
             @ApiResponse(code = 400, message = "Author not found error code.")
     })
     AuthorDTO findById(Long id);
+
+    @ApiOperation(value = "Find all registered authors.")
+    @ApiResponses(value = @ApiResponse(code = 201, message = "Return all registered authors"))
+    List<AuthorDTO> findAll();
 }

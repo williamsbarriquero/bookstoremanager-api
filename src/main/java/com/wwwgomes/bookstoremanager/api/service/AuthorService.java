@@ -8,6 +8,9 @@ import com.wwwgomes.bookstoremanager.exception.AuthorNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class AuthorService {
 
@@ -34,6 +37,13 @@ public class AuthorService {
                 .orElseThrow(() -> new AuthorNotFoundException(id));
 
         return authorMapper.toDTO(foundAuthor);
+    }
+
+    public List<AuthorDTO> findAll() {
+        return authorRepository.findAll()
+                .stream()
+                .map(authorMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
     private void verifyIfExists(String authorName) {
