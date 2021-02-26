@@ -5,6 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -22,11 +23,18 @@ public interface AuthorResourceDocs {
     @ApiOperation(value = "Find author by id operation.")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Success author found"),
-            @ApiResponse(code = 400, message = "Author not found error code.")
+            @ApiResponse(code = 404, message = "Author not found error code.")
     })
     AuthorDTO findById(Long id);
 
     @ApiOperation(value = "Find all registered authors.")
     @ApiResponses(value = @ApiResponse(code = 201, message = "Return all registered authors"))
     List<AuthorDTO> findAll();
+
+    @ApiOperation(value = "Delete author by id operation.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 204, message = "Success author deleted"),
+            @ApiResponse(code = 404, message = "Author not found error code.")
+    })
+    void deleteBy(@PathVariable Long id);
 }
