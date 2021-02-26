@@ -106,4 +106,16 @@ class AuthorResourceTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].age", Is.is(expectedFoundAuthorDTO.getAge())));
 
     }
+
+    @Test
+    void whenDELETEWithValidIdIsCalledThenNoContentShouldBeReturned() throws Exception {
+        var expectedAuthorDeletedDTO = authorDTOBuilder.buildAuthorDTO();
+
+        var expectedAuthorDeletedId = expectedAuthorDeletedDTO.getId();
+        Mockito.doNothing().when(authorService).deleteBy(expectedAuthorDeletedId);
+
+        mockMvc.perform(MockMvcRequestBuilders.delete(AUTHOR_API_URL_PATH + "/" + expectedAuthorDeletedId)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
+    }
 }

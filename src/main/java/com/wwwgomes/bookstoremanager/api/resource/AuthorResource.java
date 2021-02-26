@@ -39,4 +39,11 @@ public class AuthorResource implements AuthorResourceDocs {
     public List<AuthorDTO> findAll() {
         return authorService.findAll();
     }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Override
+    public void deleteBy(@PathVariable Long id) {
+        authorService.deleteBy(id);
+    }
 }

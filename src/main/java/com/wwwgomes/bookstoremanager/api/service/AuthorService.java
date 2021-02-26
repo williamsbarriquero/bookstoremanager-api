@@ -2,6 +2,7 @@ package com.wwwgomes.bookstoremanager.api.service;
 
 import com.wwwgomes.bookstoremanager.api.dto.AuthorDTO;
 import com.wwwgomes.bookstoremanager.api.mapper.AuthorMapper;
+import com.wwwgomes.bookstoremanager.domain.entity.Author;
 import com.wwwgomes.bookstoremanager.domain.repository.AuthorRepository;
 import com.wwwgomes.bookstoremanager.exception.AuthorAlreadyExistsException;
 import com.wwwgomes.bookstoremanager.exception.AuthorNotFoundException;
@@ -33,8 +34,7 @@ public class AuthorService {
     }
 
     public AuthorDTO findById(Long id) {
-        var foundAuthor = authorRepository.findById(id)
-                .orElseThrow(() -> new AuthorNotFoundException(id));
+        var foundAuthor = verifyAndGetAuthorBy(id);
 
         return authorMapper.toDTO(foundAuthor);
     }
@@ -46,10 +46,20 @@ public class AuthorService {
                 .collect(Collectors.toList());
     }
 
+    public void deleteBy(Long id) {
+        verifyAndGetAuthorBy(id);
+        authorRepository.deleteById(id);
+    }
+
     private void verifyIfExists(String authorName) {
         authorRepository.findByName(authorName)
                 .ifPresent(author -> {
                     throw new AuthorAlreadyExistsException(author.getName());
                 });
+    }
+
+    private Author verifyAndGetAuthorBy(Long id) {
+        return authorRepository.findById(id)
+                .orElseThrow(() -> new AuthorNotFoundException(id));
     }
 }
