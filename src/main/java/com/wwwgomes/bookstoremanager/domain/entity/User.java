@@ -1,6 +1,7 @@
 package com.wwwgomes.bookstoremanager.domain.entity;
 
 import com.wwwgomes.bookstoremanager.domain.entity.enums.Gender;
+import com.wwwgomes.bookstoremanager.domain.entity.enums.Role;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -41,4 +42,8 @@ public class User extends Auditable {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Book> books;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    private Role role;
 }

@@ -62,4 +62,9 @@ public class AuthorService {
         return authorRepository.findById(id)
                 .orElseThrow(() -> new AuthorNotFoundException(id));
     }
+
+    public Author verifyAndGetIfExists(Long id) {
+        return authorRepository.findById(id)
+                .orElseThrow(() -> new AuthorNotFoundException(id));
+    }
 }
